@@ -1,0 +1,14 @@
+c:\users\k.barutska\documents\visual studio 2017\Projects\WebScrape\WebScrape\bin\Debug\WebScrape.exe.config
+c:\users\k.barutska\documents\visual studio 2017\Projects\WebScrape\WebScrape\bin\Debug\WebScrape.exe
+c:\users\k.barutska\documents\visual studio 2017\Projects\WebScrape\WebScrape\bin\Debug\WebScrape.pdb
+c:\users\k.barutska\documents\visual studio 2017\Projects\WebScrape\WebScrape\bin\Debug\WebScrape.Buisness.dll
+c:\users\k.barutska\documents\visual studio 2017\Projects\WebScrape\WebScrape\bin\Debug\HtmlAgilityPack.dll
+c:\users\k.barutska\documents\visual studio 2017\Projects\WebScrape\WebScrape\bin\Debug\WebScrape.Buisness.pdb
+c:\users\k.barutska\documents\visual studio 2017\Projects\WebScrape\WebScrape\bin\Debug\HtmlAgilityPack.pdb
+c:\users\k.barutska\documents\visual studio 2017\Projects\WebScrape\WebScrape\bin\Debug\HtmlAgilityPack.xml
+c:\users\k.barutska\documents\visual studio 2017\Projects\WebScrape\WebScrape\obj\Debug\WebScrape.csprojResolveAssemblyReference.cache
+c:\users\k.barutska\documents\visual studio 2017\Projects\WebScrape\WebScrape\obj\Debug\WebScrape.Properties.Resources.resources
+c:\users\k.barutska\documents\visual studio 2017\Projects\WebScrape\WebScrape\obj\Debug\WebScrape.Scrape.resources
+c:\users\k.barutska\documents\visual studio 2017\Projects\WebScrape\WebScrape\obj\Debug\WebScrape.csproj.GenerateResource.Cache
+c:\users\k.barutska\documents\visual studio 2017\Projects\WebScrape\WebScrape\obj\Debug\WebScrape.exe
+c:\users\k.barutska\documents\visual studio 2017\Projects\WebScrape\WebScrape\obj\Debug\WebScrape.pdb
