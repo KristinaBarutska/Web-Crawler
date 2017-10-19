@@ -30,11 +30,15 @@ namespace WebScrape
             var content = new Content();
             var resault = content.GetContent(url);
             //resaultLabel.Text = resault;
+                      
+            List<TreeNode> treeNodeList = new List<TreeNode>();
             foreach (var item in resault)
             {
-                TreeNode treeNode = new TreeNode(item);
-                UrlTreeView.Nodes.Add(treeNode);
+                TreeNode childNode = new TreeNode(item);
+                treeNodeList.Add(childNode);                
             }
+            TreeNode treeNode = new TreeNode(url, treeNodeList.ToArray());
+            UrlTreeView.Nodes.Add(treeNode);
         }
 
         private void Scrape_Load(object sender, EventArgs e)
