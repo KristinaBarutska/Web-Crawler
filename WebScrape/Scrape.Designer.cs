@@ -31,6 +31,7 @@
             this.resaultLabel = new System.Windows.Forms.Label();
             this.UrlTextBox = new System.Windows.Forms.TextBox();
             this.submitButton = new System.Windows.Forms.Button();
+            this.UrlTreeView = new System.Windows.Forms.TreeView();
             this.SuspendLayout();
             // 
             // resaultLabel
@@ -38,9 +39,8 @@
             this.resaultLabel.AutoSize = true;
             this.resaultLabel.Location = new System.Drawing.Point(28, 79);
             this.resaultLabel.Name = "resaultLabel";
-            this.resaultLabel.Size = new System.Drawing.Size(41, 13);
+            this.resaultLabel.Size = new System.Drawing.Size(0, 13);
             this.resaultLabel.TabIndex = 0;
-            this.resaultLabel.Text = "[label1]";
             // 
             // UrlTextBox
             // 
@@ -60,16 +60,25 @@
             this.submitButton.UseVisualStyleBackColor = true;
             this.submitButton.Click += new System.EventHandler(this.submitButton_Click);
             // 
+            // UrlTreeView
+            // 
+            this.UrlTreeView.Location = new System.Drawing.Point(31, 78);
+            this.UrlTreeView.Name = "UrlTreeView";
+            this.UrlTreeView.Size = new System.Drawing.Size(483, 393);
+            this.UrlTreeView.TabIndex = 3;
+            // 
             // Scrape
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(542, 261);
+            this.ClientSize = new System.Drawing.Size(542, 504);
+            this.Controls.Add(this.UrlTreeView);
             this.Controls.Add(this.submitButton);
             this.Controls.Add(this.UrlTextBox);
             this.Controls.Add(this.resaultLabel);
             this.Name = "Scrape";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Scrape_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -80,6 +89,7 @@
         private System.Windows.Forms.Label resaultLabel;
         private System.Windows.Forms.TextBox UrlTextBox;
         private System.Windows.Forms.Button submitButton;
+        private System.Windows.Forms.TreeView UrlTreeView;
     }
 }
 
