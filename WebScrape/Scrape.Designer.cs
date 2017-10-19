@@ -41,12 +41,12 @@
             // 
             this.UrlTextBox.Location = new System.Drawing.Point(66, 11);
             this.UrlTextBox.Name = "UrlTextBox";
-            this.UrlTextBox.Size = new System.Drawing.Size(483, 20);
+            this.UrlTextBox.Size = new System.Drawing.Size(525, 20);
             this.UrlTextBox.TabIndex = 1;
             // 
             // submitButton
             // 
-            this.submitButton.Location = new System.Drawing.Point(245, 57);
+            this.submitButton.Location = new System.Drawing.Point(66, 64);
             this.submitButton.Name = "submitButton";
             this.submitButton.Size = new System.Drawing.Size(75, 23);
             this.submitButton.TabIndex = 2;
@@ -58,7 +58,7 @@
             // 
             this.UrlTreeView.Location = new System.Drawing.Point(31, 122);
             this.UrlTreeView.Name = "UrlTreeView";
-            this.UrlTreeView.Size = new System.Drawing.Size(518, 393);
+            this.UrlTreeView.Size = new System.Drawing.Size(560, 393);
             this.UrlTreeView.TabIndex = 3;
             // 
             // UrlLabel
@@ -83,14 +83,14 @@
             // 
             this.levelsTextBox.Location = new System.Drawing.Point(66, 37);
             this.levelsTextBox.Name = "levelsTextBox";
-            this.levelsTextBox.Size = new System.Drawing.Size(100, 20);
+            this.levelsTextBox.Size = new System.Drawing.Size(75, 20);
             this.levelsTextBox.TabIndex = 6;
             // 
             // errorLabel
             // 
             this.errorLabel.AutoSize = true;
             this.errorLabel.ForeColor = System.Drawing.Color.Coral;
-            this.errorLabel.Location = new System.Drawing.Point(31, 90);
+            this.errorLabel.Location = new System.Drawing.Point(182, 37);
             this.errorLabel.Name = "errorLabel";
             this.errorLabel.Size = new System.Drawing.Size(59, 13);
             this.errorLabel.TabIndex = 7;
@@ -98,9 +98,10 @@
             // 
             // Scrape
             // 
+            this.AcceptButton = this.submitButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(603, 504);
+            this.ClientSize = new System.Drawing.Size(603, 539);
             this.Controls.Add(this.errorLabel);
             this.Controls.Add(this.levelsTextBox);
             this.Controls.Add(this.LevelsLabel);

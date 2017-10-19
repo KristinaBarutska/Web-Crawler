@@ -45,7 +45,10 @@ namespace WebScrape
                 errorLabel.Text = ex.Message;
             }
                       
-            
+            catch(System.ArgumentException ex)
+            {
+                errorLabel.Text = ex.Message;
+            }
         }
         
     }
