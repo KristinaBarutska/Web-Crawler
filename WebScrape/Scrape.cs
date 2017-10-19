@@ -28,42 +28,25 @@ namespace WebScrape
         {
             string url = UrlTextBox.Text;
             var content = new Content();
-            var resault = content.GetContent(url);
-            //resaultLabel.Text = resault;
-                      
-            List<TreeNode> treeNodeList = new List<TreeNode>();
-            foreach (var item in resault)
+            try
             {
-                TreeNode childNode = new TreeNode(item);
-                treeNodeList.Add(childNode);                
+                var resault = content.GetContent(url);
+                List<TreeNode> treeNodeList = new List<TreeNode>();
+                foreach (var item in resault)
+                {
+                    TreeNode childNode = new TreeNode(item);
+                    treeNodeList.Add(childNode);
+                }
+                TreeNode treeNode = new TreeNode(url, treeNodeList.ToArray());
+                UrlTreeView.Nodes.Add(treeNode);
             }
-            TreeNode treeNode = new TreeNode(url, treeNodeList.ToArray());
-            UrlTreeView.Nodes.Add(treeNode);
+            catch(System.InvalidOperationException ex)
+            {
+                errorLabel.Text = ex.Message;
+            }
+                      
+            
         }
-
-        private void Scrape_Load(object sender, EventArgs e)
-        {
-            //// This is the first node in the view.
-            ////
-            //TreeNode treeNode = new TreeNode("Windows");
-            //UrlTreeView.Nodes.Add(treeNode);
-            ////
-            //// Another node following the first node.
-            ////
-            //treeNode = new TreeNode("Linux");
-            //UrlTreeView.Nodes.Add(treeNode);
-            ////
-            //// Create two child nodes and put them in an array.
-            //// ... Add the third node, and specify these as its children.
-            ////
-            //TreeNode node2 = new TreeNode("C#");
-            //TreeNode node3 = new TreeNode("VB.NET");
-            //TreeNode[] array = new TreeNode[] { node2, node3 };
-            ////
-            //// Final node.
-            ////
-            //treeNode = new TreeNode("Dot Net Perls", array);
-            //UrlTreeView.Nodes.Add(treeNode);
-        }
+        
     }
 }

@@ -11,19 +11,29 @@ namespace WebScrape.Buisness
     {
         public List<string> GetContent(string baseUrl)
         {
-            HtmlWeb web = new HtmlWeb();
-            HtmlDocument document = web.Load(baseUrl);
-            HtmlNode[] nodes = document.DocumentNode.SelectNodes("//a[@href]").ToArray();
-            List<string> resault = new List<string>();
-            foreach (HtmlNode link in nodes)
+            if (!Uri.IsWellFormedUriString(baseUrl, UriKind.Absolute))
             {
-                string hrefValue = link.GetAttributeValue("href", string.Empty);
-                if (hrefValue != "#")
-                {
-                    resault.Add(GetAbsoluteUrlString(baseUrl, hrefValue) + Environment.NewLine);
-                }
+                throw new System.InvalidOperationException("Please enter a valid URL");
             }
-            return resault;
+            else
+            {
+                HtmlWeb web = new HtmlWeb();
+                HtmlDocument document = web.Load(baseUrl);
+                HtmlNode[] nodes = document.DocumentNode.SelectNodes("//a[@href]").ToArray();
+                List<string> resault = new List<string>();
+                foreach (HtmlNode link in nodes)
+                {
+                    string hrefValue = link.GetAttributeValue("href", string.Empty);
+                    if (hrefValue != null && hrefValue!=String.Empty)
+                    {
+                        if (hrefValue != "#" && !hrefValue.Contains(baseUrl) && hrefValue[0] != '/')
+                        {
+                            resault.Add(GetAbsoluteUrlString(baseUrl, hrefValue) + Environment.NewLine);
+                        }
+                    }
+                }
+                return resault;
+            }
         }
 
         private static string GetAbsoluteUrlString(string baseUrl, string url)
