@@ -11,7 +11,7 @@ namespace WebScrape.Buisness
     public class UrlTree
     {
 
-        public List<string> CrawlUrls(string baseUrl)
+        public List<string> GetUrls(string baseUrl)
         {
             
             if (!Uri.IsWellFormedUriString(baseUrl, UriKind.Absolute))
