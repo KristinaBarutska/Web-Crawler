@@ -56,7 +56,7 @@
             // 
             // UrlTreeView
             // 
-            this.UrlTreeView.Location = new System.Drawing.Point(31, 122);
+            this.UrlTreeView.Location = new System.Drawing.Point(31, 104);
             this.UrlTreeView.Name = "UrlTreeView";
             this.UrlTreeView.Size = new System.Drawing.Size(560, 393);
             this.UrlTreeView.TabIndex = 3;

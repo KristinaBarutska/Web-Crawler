@@ -4,13 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
+using System.Threading;
 
 namespace WebScrape.Buisness
 {
-    public class Content
+    public class UrlTree
     {
-        public List<string> GetContent(string baseUrl)
+
+        public List<string> CrawlUrls(string baseUrl)
         {
+            
             if (!Uri.IsWellFormedUriString(baseUrl, UriKind.Absolute))
             {
                 throw new System.InvalidOperationException("Please enter a valid URL");
@@ -20,21 +23,26 @@ namespace WebScrape.Buisness
                 HtmlWeb web = new HtmlWeb();
                 HtmlDocument document = web.Load(baseUrl);
                 HtmlNode[] nodes = document.DocumentNode.SelectNodes("//a[@href]").ToArray();
-                List<string> resault = new List<string>();
+                List<string> urlList = new List<string>();
+
                 foreach (HtmlNode link in nodes)
                 {
                     string hrefValue = link.GetAttributeValue("href", string.Empty);
-                    if (hrefValue != null && hrefValue!=String.Empty)
+                    if (hrefValue != null && hrefValue != String.Empty)
                     {
                         if (hrefValue != "#" && !hrefValue.Contains(baseUrl) && hrefValue[0] != '/')
                         {
-                            resault.Add(GetAbsoluteUrlString(baseUrl, hrefValue) + Environment.NewLine);
+                            urlList.Add(GetAbsoluteUrlString(baseUrl, hrefValue) + Environment.NewLine);
                         }
                     }
                 }
-                return resault;
+                Thread.Sleep(3000);
+                return urlList;
             }
+
         }
+
+       
 
         private static string GetAbsoluteUrlString(string baseUrl, string url)
         {
