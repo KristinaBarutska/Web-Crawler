@@ -13,17 +13,27 @@ namespace WebScrape.Buisness
 
         public List<Url> GetUrls(string baseUrl)
         {
-            
-            if (!Uri.IsWellFormedUriString(baseUrl, UriKind.Absolute))
-            {
-                throw new System.InvalidOperationException("Please enter a valid URL");
-            }
-            else
+            baseUrl = baseUrl.Trim(new char[] { '\r', '\n' });
+
+            List<Url> urlList = new List<Url>();
+
+            Uri tempUrlObj = null;
+            if (
+                Uri.IsWellFormedUriString(baseUrl, UriKind.Absolute) &&
+                (System.Uri.TryCreate(baseUrl, UriKind.Absolute, out tempUrlObj) &&
+                (tempUrlObj.Scheme == Uri.UriSchemeHttp|| tempUrlObj.Scheme == Uri.UriSchemeHttps))
+                )
             {
                 HtmlWeb web = new HtmlWeb();
                 HtmlDocument document = web.Load(baseUrl);
-                HtmlNode[] nodes = document.DocumentNode.SelectNodes("//a[@href]").ToArray();
-                List<Url> urlList = new List<Url>();
+                HtmlNode[] nodes = document.DocumentNode.SelectNodes("//a[@href]")?.ToArray();
+
+
+
+                if (nodes == null)
+                {
+                    return urlList;
+                }
 
                 foreach (HtmlNode link in nodes)
                 {
@@ -40,10 +50,13 @@ namespace WebScrape.Buisness
                     }
                 }
                 //Thread.Sleep(3000);
-                return urlList;
+                
             }
-
+            return urlList;
         }
+
+    
+    
 
        
 

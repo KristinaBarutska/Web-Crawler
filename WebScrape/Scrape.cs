@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WebScrape.Buisness;
@@ -12,7 +13,7 @@ namespace WebScrape
         public Scrape()
         {
             InitializeComponent();
-            
+
         }
 
         private async void submitButton_Click(object sender, EventArgs e)
@@ -39,26 +40,51 @@ namespace WebScrape
             }
         }
 
-        public void PopulateTree(List<Url> urls)
+        public async void PopulateTree(List<Url> urls)
         {
 
             UrlTreeView.Nodes.Clear();
-
-            TreeNode[] treeNodes = PopulateTreeNodes(urls);
-            UpdateUI(treeNodes);
+            TreeNode root = new TreeNode();
+            root.Text = "My url";
+            root.Tag = null;
+            //TreeNode[] treeNodes = PopulateTreeNodes(urls);
+            await Task.Run(() => PopulateTreeNodes1(ref root, urls, 0));
+            
+            UpdateUI1(root);
         }
 
-        private TreeNode[] PopulateTreeNodes(List<Url> urls)
+        //private TreeNode[] PopulateTreeNodes(List<Url> urls)
+        //{
+
+        //    List<TreeNode> treeNodes = new List<TreeNode>(urls.Count);
+
+        //    foreach (Url url in urls)
+        //    {
+        //        treeNodes.Add(new TreeNode(url.Name));
+        //    }
+
+        //    return treeNodes.ToArray();
+        //}
+
+        public void PopulateTreeNodes1(ref TreeNode root, List<Url> urls, int level)
         {
-
-            List<TreeNode> treeNodes = new List<TreeNode>(urls.Count);
-
-            foreach(Url url in urls)
+            if (level <= 1) // use constant instead
             {
-                treeNodes.Add(new TreeNode(url.Name));
+                foreach (var url in urls)
+                {
+                    var child = new TreeNode()
+                    {
+                        Text = url.Name,
+                    };
+
+                    var urlTree = new UrlTree();
+                    var childUrlObjects = urlTree.GetUrls(url.Name);
+                    PopulateTreeNodes1(ref child, childUrlObjects, level + 1);
+                    root.Nodes.Add(child);
+                }
             }
 
-            return treeNodes.ToArray();
+            return;
         }
 
         private async Task<List<TreeNode>> GetLinks(string url)
@@ -81,6 +107,13 @@ namespace WebScrape
             UrlTreeView.Nodes.Clear();
 
             UrlTreeView.Nodes.AddRange(nodes);
+        }
+
+        private void UpdateUI1(TreeNode nodes)
+        {
+            UrlTreeView.Nodes.Clear();
+
+            UrlTreeView.Nodes.Add(nodes);
         }
 
     }
