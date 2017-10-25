@@ -21,9 +21,9 @@ namespace WebScrape
             try
             {
                 string url = UrlTextBox.Text;
-                
+                int levels = int.Parse(levelsTextBox.Text);
                 var urlTree = new UrlTree();
-                List<string> result = await Task.Run(() => urlTree.GetUrls(url));
+                List<Url> result = await Task.Run(() => urlTree.GetUrls(url));
                 PopulateTree(result);
 
             }
@@ -39,42 +39,38 @@ namespace WebScrape
             }
         }
 
-        public void PopulateTree(List<string> urls)
+        public void PopulateTree(List<Url> urls)
         {
-            //Set tree to 'loading' state
-            UrlTreeView.Nodes.Clear();
 
-            //Task<TreeNode[]> t = Task<TreeNode[]>.Factory.StartNew(() => PopulateTreeNodes(urls));
-            //t.ContinueWith(x => UpdateUI(x.Result), TaskScheduler.FromCurrentSynchronizationContext());
+            UrlTreeView.Nodes.Clear();
 
             TreeNode[] treeNodes = PopulateTreeNodes(urls);
             UpdateUI(treeNodes);
         }
 
-        private TreeNode[] PopulateTreeNodes(List<string> urls)
+        private TreeNode[] PopulateTreeNodes(List<Url> urls)
         {
-            //var subUrls = GetSubcategories(urls);
-            //IList<TreeNode> treeNodes = await urls.Select(GetSubcategories).ToList();
+
             List<TreeNode> treeNodes = new List<TreeNode>(urls.Count);
 
-            foreach(string url in urls)
+            foreach(Url url in urls)
             {
-                treeNodes.Add(new TreeNode(url));
+                treeNodes.Add(new TreeNode(url.Name));
             }
 
             return treeNodes.ToArray();
         }
 
-        private async Task<List<TreeNode>> GetSubcategories(string url)
+        private async Task<List<TreeNode>> GetLinks(string url)
         {
             var node = new TreeNode();
             var urlTree = new UrlTree();
-            List<string> result = await Task.Run(() => urlTree.GetUrls(url));
+            List<Url> result = await Task.Run(() => urlTree.GetUrls(url));
             List<TreeNode> treenodeResult = new List<TreeNode>();
 
             for (int i = 0; i < result.Count; i++)
             {
-                treenodeResult.Add(new TreeNode(result[i]));
+                treenodeResult.Add(new TreeNode(result[i].Name));
             }
 
             return treenodeResult;

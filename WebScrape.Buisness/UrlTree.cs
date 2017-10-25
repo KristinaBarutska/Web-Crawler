@@ -11,7 +11,7 @@ namespace WebScrape.Buisness
     public class UrlTree
     {
 
-        public List<string> GetUrls(string baseUrl)
+        public List<Url> GetUrls(string baseUrl)
         {
             
             if (!Uri.IsWellFormedUriString(baseUrl, UriKind.Absolute))
@@ -23,7 +23,7 @@ namespace WebScrape.Buisness
                 HtmlWeb web = new HtmlWeb();
                 HtmlDocument document = web.Load(baseUrl);
                 HtmlNode[] nodes = document.DocumentNode.SelectNodes("//a[@href]").ToArray();
-                List<string> urlList = new List<string>();
+                List<Url> urlList = new List<Url>();
 
                 foreach (HtmlNode link in nodes)
                 {
@@ -32,11 +32,14 @@ namespace WebScrape.Buisness
                     {
                         if (hrefValue != "#" && !hrefValue.Contains(baseUrl) && hrefValue[0] != '/')
                         {
-                            urlList.Add(GetAbsoluteUrlString(baseUrl, hrefValue) + Environment.NewLine);
+                            Url currentUrl = new Url();
+                            currentUrl.Name = GetAbsoluteUrlString(baseUrl, hrefValue) + Environment.NewLine;
+                            urlList.Add(currentUrl);
+                            //urlList.Add(GetAbsoluteUrlString(baseUrl, hrefValue) + Environment.NewLine);
                         }
                     }
                 }
-                Thread.Sleep(3000);
+                //Thread.Sleep(3000);
                 return urlList;
             }
 
