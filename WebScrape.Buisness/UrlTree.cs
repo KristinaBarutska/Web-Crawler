@@ -25,32 +25,42 @@ namespace WebScrape.Buisness
                 )
             {
                 HtmlWeb web = new HtmlWeb();
-                HtmlDocument document = web.Load(baseUrl);
-                HtmlNode[] nodes = document.DocumentNode.SelectNodes("//a[@href]")?.ToArray();
-
-
-
-                if (nodes == null)
+                try
                 {
-                    return urlList;
-                }
-
-                foreach (HtmlNode link in nodes)
-                {
-                    string hrefValue = link.GetAttributeValue("href", string.Empty);
-                    if (hrefValue != null && hrefValue != String.Empty)
+                    HtmlDocument document = web.Load(baseUrl);
+                    if (web.StatusCode != System.Net.HttpStatusCode.OK)
                     {
-                        if (hrefValue != "#" && !hrefValue.Contains(baseUrl) && hrefValue[0] != '/')
+                        return urlList;
+                    }
+
+                    HtmlNode[] nodes = document.DocumentNode.SelectNodes("//a[@href]")?.ToArray();
+
+                    if (nodes == null)
+                    {
+                        return urlList;
+                    }
+
+                    foreach (HtmlNode link in nodes)
+                    {
+                        string hrefValue = link.GetAttributeValue("href", string.Empty);
+                        if (hrefValue != null && hrefValue != String.Empty)
                         {
-                            Url currentUrl = new Url();
-                            currentUrl.Name = GetAbsoluteUrlString(baseUrl, hrefValue) + Environment.NewLine;
-                            urlList.Add(currentUrl);
-                            //urlList.Add(GetAbsoluteUrlString(baseUrl, hrefValue) + Environment.NewLine);
+                            if (hrefValue != "#" && !hrefValue.Contains(baseUrl) && hrefValue[0] != '/')
+                            {
+                                Url currentUrl = new Url();
+                                currentUrl.Name = GetAbsoluteUrlString(baseUrl, hrefValue) + Environment.NewLine;
+                                urlList.Add(currentUrl);
+                                //urlList.Add(GetAbsoluteUrlString(baseUrl, hrefValue) + Environment.NewLine);
+                            }
                         }
                     }
+                    //Thread.Sleep(3000);
                 }
-                //Thread.Sleep(3000);
-                
+                catch (Exception ex)
+                {
+                    // TODO: maybe log the exception
+                    return urlList;
+                }
             }
             return urlList;
         }

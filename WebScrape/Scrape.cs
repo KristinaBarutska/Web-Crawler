@@ -51,6 +51,7 @@ namespace WebScrape
             await Task.Run(() => PopulateTreeNodes1(ref root, urls, 0));
             
             UpdateUI1(root);
+            return;
         }
 
         //private TreeNode[] PopulateTreeNodes(List<Url> urls)
