@@ -18,13 +18,15 @@ namespace WebScrape.Buisness
 
             List<Url> urlList = new List<Url>();
             HashSet<string> LinksHashSet = new HashSet<string>();
-
+            if (!baseUrl.StartsWith("http://") && !baseUrl.StartsWith("https://"))
+            {
+                baseUrl = "http://" + baseUrl;
+            }
             Uri tempUrlObj = null;
-            if (
-                Uri.IsWellFormedUriString(baseUrl, UriKind.Absolute) &&
-                (System.Uri.TryCreate(baseUrl, UriKind.Absolute, out tempUrlObj) &&
-                (tempUrlObj.Scheme == Uri.UriSchemeHttp|| tempUrlObj.Scheme == Uri.UriSchemeHttps))
-                )
+            if  (System.Uri.TryCreate(baseUrl, UriKind.Absolute, out tempUrlObj)
+                && (Uri.IsWellFormedUriString(baseUrl, UriKind.Absolute) 
+                &&(tempUrlObj.Scheme == Uri.UriSchemeHttp|| tempUrlObj.Scheme == Uri.UriSchemeHttps)))
+
             {
                 HtmlWeb web = new HtmlWeb();
                 try
@@ -52,17 +54,25 @@ namespace WebScrape.Buisness
                             {
                                 Url currentUrl = new Url();
                                 currentUrl.Name = GetAbsoluteUrlString(baseUrl, hrefValue) + Environment.NewLine;
-                                if (!LinksHashSet.Contains(currentUrl.Name))
+                                if (!currentUrl.Name.Contains(tempUrlObj.Host))
                                 {
-                                    LinksHashSet.Add(currentUrl.Name);
-                                    urlList.Add(currentUrl);
+                                    if (!LinksHashSet.Contains(currentUrl.Name))
+                                    {
+                                        LinksHashSet.Add(currentUrl.Name);
+                                        urlList.Add(currentUrl);
+                                    }
                                 }
-                                //urlList.Add(GetAbsoluteUrlString(baseUrl, hrefValue) + Environment.NewLine);
+
                             }
                         }
                     }
                 }
-                catch (Exception ex)
+                catch (System.Net.WebException)
+                {
+                    // TODO: maybe log the exception
+                    return urlList;
+                }
+                catch (Exception )
                 {
                     // TODO: maybe log the exception
                     return urlList;
@@ -81,7 +91,7 @@ namespace WebScrape.Buisness
             var uri = new Uri(url, UriKind.RelativeOrAbsolute);
             if (!uri.IsAbsoluteUri)
                 uri = new Uri(new Uri(baseUrl), uri);
-            return uri.ToString();
+            return uri.Host.ToString();
         }
     }
 }

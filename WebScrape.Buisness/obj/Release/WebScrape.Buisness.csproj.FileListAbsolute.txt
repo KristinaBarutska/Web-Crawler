@@ -1,0 +1,7 @@
+C:\Users\k.barutska\Documents\Visual Studio 2017\Projects\WebScrape\WebScrape.Buisness\bin\Release\WebScrape.Buisness.dll
+C:\Users\k.barutska\Documents\Visual Studio 2017\Projects\WebScrape\WebScrape.Buisness\bin\Release\WebScrape.Buisness.pdb
+C:\Users\k.barutska\Documents\Visual Studio 2017\Projects\WebScrape\WebScrape.Buisness\bin\Release\HtmlAgilityPack.dll
+C:\Users\k.barutska\Documents\Visual Studio 2017\Projects\WebScrape\WebScrape.Buisness\bin\Release\HtmlAgilityPack.pdb
+C:\Users\k.barutska\Documents\Visual Studio 2017\Projects\WebScrape\WebScrape.Buisness\bin\Release\HtmlAgilityPack.xml
+C:\Users\k.barutska\Documents\Visual Studio 2017\Projects\WebScrape\WebScrape.Buisness\obj\Release\WebScrape.Buisness.dll
+C:\Users\k.barutska\Documents\Visual Studio 2017\Projects\WebScrape\WebScrape.Buisness\obj\Release\WebScrape.Buisness.pdb

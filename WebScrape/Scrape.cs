@@ -42,7 +42,7 @@ namespace WebScrape
 
         public async void PopulateTree(List<Url> urls)
         {
-
+            int levels = int.Parse(levelsTextBox.Text);
             UrlTreeView.Nodes.Clear();
             TreeNode root = new TreeNode();
             root.Text = UrlTextBox.Text;
@@ -56,7 +56,8 @@ namespace WebScrape
 
         public void PopulateTreeNodes(ref TreeNode root, List<Url> urls, int level)
         {
-            if (level < 1) 
+            int levels = int.Parse(levelsTextBox.Text);
+            if (level < levels) 
             {
                 foreach (var url in urls)
                 {
@@ -90,12 +91,7 @@ namespace WebScrape
             return treenodeResult;
         }
 
-        //private void UpdateUI(TreeNode[] nodes)
-        //{
-        //    UrlTreeView.Nodes.Clear();
 
-        //    UrlTreeView.Nodes.AddRange(nodes);
-        //}
 
         private void UpdateUI(TreeNode node)
         {
