@@ -45,31 +45,18 @@ namespace WebScrape
 
             UrlTreeView.Nodes.Clear();
             TreeNode root = new TreeNode();
-            root.Text = "My url";
-            root.Tag = null;
-            //TreeNode[] treeNodes = PopulateTreeNodes(urls);
-            await Task.Run(() => PopulateTreeNodes1(ref root, urls, 0));
+            root.Text = UrlTextBox.Text;
+
+            await Task.Run(() => PopulateTreeNodes(ref root, urls, 0));
             
-            UpdateUI1(root);
+            UpdateUI(root);
             return;
         }
 
-        //private TreeNode[] PopulateTreeNodes(List<Url> urls)
-        //{
 
-        //    List<TreeNode> treeNodes = new List<TreeNode>(urls.Count);
-
-        //    foreach (Url url in urls)
-        //    {
-        //        treeNodes.Add(new TreeNode(url.Name));
-        //    }
-
-        //    return treeNodes.ToArray();
-        //}
-
-        public void PopulateTreeNodes1(ref TreeNode root, List<Url> urls, int level)
+        public void PopulateTreeNodes(ref TreeNode root, List<Url> urls, int level)
         {
-            if (level <= 1) // use constant instead
+            if (level < 1) 
             {
                 foreach (var url in urls)
                 {
@@ -80,7 +67,7 @@ namespace WebScrape
 
                     var urlTree = new UrlTree();
                     var childUrlObjects = urlTree.GetUrls(url.Name);
-                    PopulateTreeNodes1(ref child, childUrlObjects, level + 1);
+                    PopulateTreeNodes(ref child, childUrlObjects, level + 1);
                     root.Nodes.Add(child);
                 }
             }
@@ -103,18 +90,18 @@ namespace WebScrape
             return treenodeResult;
         }
 
-        private void UpdateUI(TreeNode[] nodes)
+        //private void UpdateUI(TreeNode[] nodes)
+        //{
+        //    UrlTreeView.Nodes.Clear();
+
+        //    UrlTreeView.Nodes.AddRange(nodes);
+        //}
+
+        private void UpdateUI(TreeNode node)
         {
             UrlTreeView.Nodes.Clear();
 
-            UrlTreeView.Nodes.AddRange(nodes);
-        }
-
-        private void UpdateUI1(TreeNode nodes)
-        {
-            UrlTreeView.Nodes.Clear();
-
-            UrlTreeView.Nodes.Add(nodes);
+            UrlTreeView.Nodes.Add(node);
         }
 
     }

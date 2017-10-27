@@ -9,13 +9,15 @@ using System.Threading;
 namespace WebScrape.Buisness
 {
     public class UrlTree
-    {
+    {     
 
         public List<Url> GetUrls(string baseUrl)
         {
+          
             baseUrl = baseUrl.Trim(new char[] { '\r', '\n' });
 
             List<Url> urlList = new List<Url>();
+            HashSet<string> LinksHashSet = new HashSet<string>();
 
             Uri tempUrlObj = null;
             if (
@@ -42,6 +44,7 @@ namespace WebScrape.Buisness
 
                     foreach (HtmlNode link in nodes)
                     {
+
                         string hrefValue = link.GetAttributeValue("href", string.Empty);
                         if (hrefValue != null && hrefValue != String.Empty)
                         {
@@ -49,12 +52,15 @@ namespace WebScrape.Buisness
                             {
                                 Url currentUrl = new Url();
                                 currentUrl.Name = GetAbsoluteUrlString(baseUrl, hrefValue) + Environment.NewLine;
-                                urlList.Add(currentUrl);
+                                if (!LinksHashSet.Contains(currentUrl.Name))
+                                {
+                                    LinksHashSet.Add(currentUrl.Name);
+                                    urlList.Add(currentUrl);
+                                }
                                 //urlList.Add(GetAbsoluteUrlString(baseUrl, hrefValue) + Environment.NewLine);
                             }
                         }
                     }
-                    //Thread.Sleep(3000);
                 }
                 catch (Exception ex)
                 {
