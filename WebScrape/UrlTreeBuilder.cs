@@ -29,8 +29,8 @@ namespace WebScrape
             await Task.Run(() => PopulateTreeNodes(ref root, result.Distinct().ToList(), 0));
 
             return root;
-        }
-        
+        }   
+
 
         private void PopulateTreeNodes(ref TreeNode root, List<Url> urls, int level)
         {
@@ -60,7 +60,6 @@ namespace WebScrape
                     root.Nodes.Add(child);
                 }
             }
-
             return;
         }
     }

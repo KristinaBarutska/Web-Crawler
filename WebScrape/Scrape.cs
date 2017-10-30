@@ -33,9 +33,11 @@ namespace WebScrape
                     UrlTreeView.Nodes.Clear();
 
                     UrlTreeBuilder tb = new UrlTreeBuilder(url, levels);
-                    var rootNode = await tb.BuildTree();
-
+                    TreeNode rootNode;
+                    
+                    rootNode = await tb.BuildTree();
                     rootNode.Text = UrlTextBox.Text;
+                    
                     UrlTreeView.Nodes.Add(rootNode);
 
                 }
@@ -58,8 +60,19 @@ namespace WebScrape
                 return true;
             if (levelsTextBox.Text.Trim() == String.Empty)
                 return true;
-            //if (TryParce(levelsTextBox.Text))
-            //    return true;
+            int num;
+
+            if(!int.TryParse(levelsTextBox.Text.Trim(), out num))
+            {
+                return true;                
+            }
+            else
+            {
+                if ( num > 3|| num<1)
+                {
+                    return true;
+                }
+            }
 
             return false;
         }
