@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace WebScrape.Buisness
 {
-    public class UrlTree
+    public class Crawler
     {     
 
         public List<Url> GetUrls(string baseUrl)

@@ -85,7 +85,7 @@
             this.levelsTextBox.Name = "levelsTextBox";
             this.levelsTextBox.Size = new System.Drawing.Size(32, 20);
             this.levelsTextBox.TabIndex = 6;
-            this.levelsTextBox.TextChanged += new System.EventHandler(this.levelsTextBox_TextChanged);
+
             // 
             // errorLabel
             // 

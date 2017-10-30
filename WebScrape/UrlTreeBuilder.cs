@@ -10,20 +10,20 @@ namespace WebScrape
 {
     public class UrlTreeBuilder
     {
-        private HashSet<Url> uniqueUrls;
+        private HashSet<string> uniqueUrls= new HashSet<string>();
         private string initialUrl;
         int levels;
 
         public UrlTreeBuilder(string initialUrl, int levels)
         {
             this.initialUrl = initialUrl;
-            this.levels = levels;
+            this.levels = levels;            
         }
 
         public async Task<TreeNode> BuildTree()
         {
-            var urlTree = new UrlTree();
-            List<Url> result = await Task.Run(() => urlTree.GetUrls(initialUrl));
+            var crawler = new Crawler();
+            List<Url> result = await Task.Run(() => crawler.GetUrls(initialUrl));
             TreeNode root = new TreeNode();
 
             await Task.Run(() => PopulateTreeNodes(ref root, result.Distinct().ToList(), 0));
@@ -43,11 +43,20 @@ namespace WebScrape
                         Text = url.Name,
                     };
 
-                    var urlTree = new UrlTree();
-                    var childUrlObjects = urlTree.GetUrls(url.Name);
-                    // filter the collection according to the contents of uniqueUrls
+                    Crawler urlTree = new Crawler();
+                    List<Url> childUrlObjects = urlTree.GetUrls(url.Name);
+                    var childUlrUniqueList = new List<Url>();
+                    //filter the collection according to the contents of uniqueUrls
+                    foreach (var childObject in childUrlObjects)
+                    {
+                        if (!uniqueUrls.Contains(childObject.Name))
+                        {
+                            uniqueUrls.Add(childObject.Name);
+                            childUlrUniqueList.Add(childObject);
+                        }
+                    }
 
-                    PopulateTreeNodes(ref child, childUrlObjects, level + 1);
+                    PopulateTreeNodes(ref child, childUlrUniqueList, level + 1);
                     root.Nodes.Add(child);
                 }
             }
