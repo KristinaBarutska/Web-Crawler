@@ -13,30 +13,59 @@ namespace WebScrape
         public Scrape()
         {
             InitializeComponent();
+        }
 
+        private bool WithErrors()
+        {
+            if (UrlTextBox.Text.Trim() == String.Empty)
+                return true; 
+            if (levelsTextBox.Text.Trim() == String.Empty )
+                return true;
+
+            return false;
         }
 
         private async void submitButton_Click(object sender, EventArgs e)
         {
-
-            try
+            if (WithErrors())
             {
-                string url = UrlTextBox.Text;
-                int levels = int.Parse(levelsTextBox.Text);
-                var urlTree = new UrlTree();
-                List<Url> result = await Task.Run(() => urlTree.GetUrls(url));
-                PopulateTree(result);
-
+                errorLabel.Text = "Please enter valid url and levels";
             }
 
-            catch (System.InvalidOperationException ex)
+            else
             {
-                errorLabel.Text = ex.Message;
-            }
+                //if(int.TryParse(levelsTextBox.Text.Trim,out int resault)){
 
-            catch (System.ArgumentException ex)
-            {
-                errorLabel.Text = ex.Message;
+                //}
+                try
+                {
+                    string url = UrlTextBox.Text;
+                    int levels = int.Parse(levelsTextBox.Text);
+                    var urlTree = new UrlTree();
+
+                    UrlTreeView.Nodes.Clear();
+                    // root.Text = UrlTextBox.Text; //?
+
+                    UrlTreeBuilder tb = new UrlTreeBuilder(url, levels);
+                    var rootNode = await tb.BuildTree();
+                    rootNode.Text = UrlTextBox.Text;
+                    //List<Url> result = await Task.Run(() => urlTree.GetUrls(url));
+                    //PopulateTree(result);
+
+
+                    UpdateUI(rootNode);
+
+                }
+
+                catch (System.InvalidOperationException ex)
+                {
+                    errorLabel.Text = ex.Message;
+                }
+
+                catch (System.ArgumentException ex)
+                {
+                    errorLabel.Text = ex.Message;
+                }
             }
         }
 
@@ -75,24 +104,7 @@ namespace WebScrape
 
             return;
         }
-
-        private async Task<List<TreeNode>> GetLinks(string url)
-        {
-            var node = new TreeNode();
-            var urlTree = new UrlTree();
-            List<Url> result = await Task.Run(() => urlTree.GetUrls(url));
-            List<TreeNode> treenodeResult = new List<TreeNode>();
-
-            for (int i = 0; i < result.Count; i++)
-            {
-                treenodeResult.Add(new TreeNode(result[i].Name));
-            }
-
-            return treenodeResult;
-        }
-
-
-
+        
         private void UpdateUI(TreeNode node)
         {
             UrlTreeView.Nodes.Clear();
@@ -100,5 +112,9 @@ namespace WebScrape
             UrlTreeView.Nodes.Add(node);
         }
 
+        private void levelsTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

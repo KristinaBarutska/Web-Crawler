@@ -39,16 +39,16 @@
             // 
             // UrlTextBox
             // 
-            this.UrlTextBox.Location = new System.Drawing.Point(66, 11);
+            this.UrlTextBox.Location = new System.Drawing.Point(12, 23);
             this.UrlTextBox.Name = "UrlTextBox";
             this.UrlTextBox.Size = new System.Drawing.Size(525, 20);
             this.UrlTextBox.TabIndex = 1;
             // 
             // submitButton
             // 
-            this.submitButton.Location = new System.Drawing.Point(66, 64);
+            this.submitButton.Location = new System.Drawing.Point(12, 114);
             this.submitButton.Name = "submitButton";
-            this.submitButton.Size = new System.Drawing.Size(75, 23);
+            this.submitButton.Size = new System.Drawing.Size(127, 23);
             this.submitButton.TabIndex = 2;
             this.submitButton.Text = "Submit";
             this.submitButton.UseVisualStyleBackColor = true;
@@ -56,15 +56,15 @@
             // 
             // UrlTreeView
             // 
-            this.UrlTreeView.Location = new System.Drawing.Point(31, 104);
+            this.UrlTreeView.Location = new System.Drawing.Point(12, 165);
             this.UrlTreeView.Name = "UrlTreeView";
-            this.UrlTreeView.Size = new System.Drawing.Size(560, 393);
+            this.UrlTreeView.Size = new System.Drawing.Size(560, 495);
             this.UrlTreeView.TabIndex = 3;
             // 
             // UrlLabel
             // 
             this.UrlLabel.AutoSize = true;
-            this.UrlLabel.Location = new System.Drawing.Point(28, 11);
+            this.UrlLabel.Location = new System.Drawing.Point(12, 7);
             this.UrlLabel.Name = "UrlLabel";
             this.UrlLabel.Size = new System.Drawing.Size(32, 13);
             this.UrlLabel.TabIndex = 4;
@@ -73,24 +73,25 @@
             // LevelsLabel
             // 
             this.LevelsLabel.AutoSize = true;
-            this.LevelsLabel.Location = new System.Drawing.Point(19, 40);
+            this.LevelsLabel.Location = new System.Drawing.Point(9, 59);
             this.LevelsLabel.Name = "LevelsLabel";
-            this.LevelsLabel.Size = new System.Drawing.Size(41, 13);
+            this.LevelsLabel.Size = new System.Drawing.Size(130, 13);
             this.LevelsLabel.TabIndex = 5;
-            this.LevelsLabel.Text = "Levels:";
+            this.LevelsLabel.Text = "Levels (between 1 and 3):";
             // 
             // levelsTextBox
             // 
-            this.levelsTextBox.Location = new System.Drawing.Point(66, 37);
+            this.levelsTextBox.Location = new System.Drawing.Point(12, 78);
             this.levelsTextBox.Name = "levelsTextBox";
-            this.levelsTextBox.Size = new System.Drawing.Size(75, 20);
+            this.levelsTextBox.Size = new System.Drawing.Size(32, 20);
             this.levelsTextBox.TabIndex = 6;
+            this.levelsTextBox.TextChanged += new System.EventHandler(this.levelsTextBox_TextChanged);
             // 
             // errorLabel
             // 
             this.errorLabel.AutoSize = true;
             this.errorLabel.ForeColor = System.Drawing.Color.Coral;
-            this.errorLabel.Location = new System.Drawing.Point(182, 37);
+            this.errorLabel.Location = new System.Drawing.Point(254, 59);
             this.errorLabel.Name = "errorLabel";
             this.errorLabel.Size = new System.Drawing.Size(59, 13);
             this.errorLabel.TabIndex = 7;
@@ -101,7 +102,7 @@
             this.AcceptButton = this.submitButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(603, 539);
+            this.ClientSize = new System.Drawing.Size(603, 688);
             this.Controls.Add(this.errorLabel);
             this.Controls.Add(this.levelsTextBox);
             this.Controls.Add(this.LevelsLabel);
