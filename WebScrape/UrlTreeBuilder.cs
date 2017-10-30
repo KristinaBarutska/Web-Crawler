@@ -24,8 +24,7 @@ namespace WebScrape
         {
             var crawler = new Crawler();
             List<Url> result = await Task.Run(() => crawler.GetUrls(initialUrl));
-            TreeNode root = new TreeNode();
-
+            TreeNode root = new TreeNode();            
             await Task.Run(() => PopulateTreeNodes(ref root, result.Distinct().ToList(), 0));
 
             return root;

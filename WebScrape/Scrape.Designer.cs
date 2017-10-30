@@ -35,6 +35,7 @@
             this.LevelsLabel = new System.Windows.Forms.Label();
             this.levelsTextBox = new System.Windows.Forms.TextBox();
             this.errorLabel = new System.Windows.Forms.Label();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // UrlTextBox
@@ -56,9 +57,9 @@
             // 
             // UrlTreeView
             // 
-            this.UrlTreeView.Location = new System.Drawing.Point(12, 165);
+            this.UrlTreeView.Location = new System.Drawing.Point(12, 193);
             this.UrlTreeView.Name = "UrlTreeView";
-            this.UrlTreeView.Size = new System.Drawing.Size(560, 495);
+            this.UrlTreeView.Size = new System.Drawing.Size(560, 529);
             this.UrlTreeView.TabIndex = 3;
             // 
             // UrlLabel
@@ -85,7 +86,6 @@
             this.levelsTextBox.Name = "levelsTextBox";
             this.levelsTextBox.Size = new System.Drawing.Size(32, 20);
             this.levelsTextBox.TabIndex = 6;
-
             // 
             // errorLabel
             // 
@@ -97,12 +97,20 @@
             this.errorLabel.TabIndex = 7;
             this.errorLabel.Text = "[error label]";
             // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(12, 153);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(560, 23);
+            this.progressBar.TabIndex = 8;
+            // 
             // Scrape
             // 
             this.AcceptButton = this.submitButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(603, 688);
+            this.ClientSize = new System.Drawing.Size(603, 749);
+            this.Controls.Add(this.progressBar);
             this.Controls.Add(this.errorLabel);
             this.Controls.Add(this.levelsTextBox);
             this.Controls.Add(this.LevelsLabel);
@@ -126,6 +134,7 @@
         private System.Windows.Forms.Label LevelsLabel;
         private System.Windows.Forms.TextBox levelsTextBox;
         private System.Windows.Forms.Label errorLabel;
+        private System.Windows.Forms.ProgressBar progressBar;
     }
 }
 

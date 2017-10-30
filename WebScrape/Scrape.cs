@@ -27,19 +27,35 @@ namespace WebScrape
 
                 try
                 {
+                    progressBar.Minimum = 0;
+                    progressBar.Maximum = 5;
+                    progressBar.Step = 1;
+                    progressBar.Value = 0;
                     string url = UrlTextBox.Text;
                     int levels = int.Parse(levelsTextBox.Text);
 
                     UrlTreeView.Nodes.Clear();
 
+                    async Task ConvertFiles()
+                    {
+                        await Task.Run(() =>
+                        {
+                            for (int i = 1; i <= 5; i++)
+                            {
+                                System.Threading.Thread.Sleep(2000);
+                                Invoke(new Action(() => progressBar.PerformStep()));
+                            }
+                        });
+                    }
+                    await ConvertFiles();
+
                     UrlTreeBuilder tb = new UrlTreeBuilder(url, levels);
-                    TreeNode rootNode;
+                    TreeNode rootNode;                                       
                     
                     rootNode = await tb.BuildTree();
                     rootNode.Text = UrlTextBox.Text;
                     
-                    UrlTreeView.Nodes.Add(rootNode);
-
+                    UrlTreeView.Nodes.Add(rootNode);                    
                 }
 
                 catch (System.InvalidOperationException ex)
@@ -77,5 +93,9 @@ namespace WebScrape
             return false;
         }
 
+        private void progressBar1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
