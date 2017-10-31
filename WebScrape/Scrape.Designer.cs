@@ -36,6 +36,8 @@
             this.levelsTextBox = new System.Windows.Forms.TextBox();
             this.errorLabel = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.statisticDataGridView = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.statisticDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // UrlTextBox
@@ -104,12 +106,21 @@
             this.progressBar.Size = new System.Drawing.Size(560, 23);
             this.progressBar.TabIndex = 8;
             // 
+            // statisticDataGridView
+            // 
+            this.statisticDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.statisticDataGridView.Location = new System.Drawing.Point(706, 153);
+            this.statisticDataGridView.Name = "statisticDataGridView";
+            this.statisticDataGridView.Size = new System.Drawing.Size(240, 150);
+            this.statisticDataGridView.TabIndex = 9;
+            // 
             // Scrape
             // 
             this.AcceptButton = this.submitButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(603, 749);
+            this.ClientSize = new System.Drawing.Size(1357, 751);
+            this.Controls.Add(this.statisticDataGridView);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.errorLabel);
             this.Controls.Add(this.levelsTextBox);
@@ -120,6 +131,7 @@
             this.Controls.Add(this.UrlTextBox);
             this.Name = "Scrape";
             this.Text = "WebScrape";
+            ((System.ComponentModel.ISupportInitialize)(this.statisticDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -135,6 +147,7 @@
         private System.Windows.Forms.TextBox levelsTextBox;
         private System.Windows.Forms.Label errorLabel;
         private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.DataGridView statisticDataGridView;
     }
 }
 
