@@ -10,7 +10,7 @@ namespace WebScrape
 {
     public class UrlTreeBuilder
     {
-        private HashSet<string> uniqueUrls= new HashSet<string>();
+        private HashSet<Url> uniqueUrls= new HashSet<Url>();
         private string initialUrl;
         int levels;
 
@@ -23,9 +23,25 @@ namespace WebScrape
         public async Task<TreeNode> BuildTree()
         {
             var crawler = new Crawler();
-            List<Url> result = await Task.Run(() => crawler.GetUrls(initialUrl));
+            List<Url> results = await Task.Run(() => crawler.GetUrls(initialUrl));
+            var resultsUniqueList = new List<Url>();
+            foreach (var result in results)
+            {
+                if (!uniqueUrls.Select(x=>x.Name).Contains(result.Name))
+                {
+                    result.Count = 1;
+                    uniqueUrls.Add(result);
+                    resultsUniqueList.Add(result);
+                }
+                else
+                {
+                    result.Count++;
+                    uniqueUrls.Add(result);
+                }
+            }
+
             TreeNode root = new TreeNode();            
-            await Task.Run(() => PopulateTreeNodes(ref root, result.Distinct().ToList(), 0));
+            await Task.Run(() => PopulateTreeNodes(ref root, resultsUniqueList, 0));
 
             return root;
         }   
@@ -48,10 +64,16 @@ namespace WebScrape
                     //filter the collection according to the contents of uniqueUrls
                     foreach (var childObject in childUrlObjects)
                     {
-                        if (!uniqueUrls.Contains(childObject.Name))
+                        if (!uniqueUrls.Select(x => x.Name).Contains(childObject.Name))
                         {
-                            uniqueUrls.Add(childObject.Name);
+                            childObject.Count = 1;
+                            uniqueUrls.Add(childObject);
                             childUlrUniqueList.Add(childObject);
+                        }
+                        else
+                        {
+                            childObject.Count++;
+                            uniqueUrls.Add(childObject);
                         }
                     }
 

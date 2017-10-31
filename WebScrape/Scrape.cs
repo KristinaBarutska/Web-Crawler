@@ -36,7 +36,7 @@ namespace WebScrape
 
                     UrlTreeView.Nodes.Clear();
 
-                    async Task ConvertFiles()
+                    async Task ShowTaskbar()
                     {
                         await Task.Run(() =>
                         {
@@ -47,7 +47,8 @@ namespace WebScrape
                             }
                         });
                     }
-                    await ConvertFiles();
+
+                    await ShowTaskbar();
 
                     UrlTreeBuilder tb = new UrlTreeBuilder(url, levels);
                     TreeNode rootNode;                                       
@@ -73,9 +74,14 @@ namespace WebScrape
         private bool WithErrors()
         {
             if (UrlTextBox.Text.Trim() == String.Empty)
+            {
                 return true;
+            }
             if (levelsTextBox.Text.Trim() == String.Empty)
+            {
                 return true;
+            }
+
             int num;
 
             if(!int.TryParse(levelsTextBox.Text.Trim(), out num))
