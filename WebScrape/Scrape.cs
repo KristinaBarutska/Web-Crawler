@@ -12,12 +12,13 @@ namespace WebScrape
     {
         private NodeBuilder nodeBuilder;
         private int levels;
-
+        private HashSet<string> uniqueLinks = new HashSet<string>();
         public Scrape()
         {
             InitializeComponent();
+
             nodeBuilder = new NodeBuilder();
-        }       
+        }
 
         private async void submitButton_Click(object sender, EventArgs e)
         {
@@ -28,31 +29,8 @@ namespace WebScrape
 
             else
             {
-
                 try
                 {
-                    //progressBar.Minimum = 0;
-                    //progressBar.Maximum = 5;
-                    //progressBar.Step = 1;
-                    //progressBar.Value = 0;
-                    
-
-                    //UrlTreeView.Nodes.Clear();
-
-                    //async Task ShowTaskbar()
-                    //{
-                    //    await Task.Run(() =>
-                    //    {
-                    //        for (int i = 1; i <= 5; i++)
-                    //        {
-                    //            System.Threading.Thread.Sleep(2000);
-                    //            Invoke(new Action(() => progressBar.PerformStep()));
-                    //        }
-                    //    });
-                    //}
-
-                    //await ShowTaskbar();
-
                     string url = UrlTextBox.Text;
                     levels = int.Parse(levelsTextBox.Text);
 
@@ -63,14 +41,6 @@ namespace WebScrape
                     UrlTreeView.Nodes.Add(mainTreeNode);
 
                     BuildTree(mainTreeNode, await Task.Run(() => nodeBuilder.GetListUrls(url)), 0, levels);
-
-                    //UrlTreeBuilder tb = new UrlTreeBuilder(url, levels);
-                    //TreeNode rootNode;                                       
-
-                    //rootNode = await tb.BuildTree();
-                    //rootNode.Text = UrlTextBox.Text;
-
-                    //UrlTreeView.Nodes.Add(rootNode);                    
                 }
 
                 catch (System.InvalidOperationException ex)
@@ -92,34 +62,33 @@ namespace WebScrape
 
             foreach (Url url in urls)
             {
-                TreeNode childNode = new TreeNode(url.Name);
-                mainTreeNode.Nodes.Add(childNode);
+                if (!uniqueLinks.Contains(url.Name))
+                {
+                    uniqueLinks.Add(url.Name);
+                    TreeNode childNode = new TreeNode(url.Name);
+                    mainTreeNode.Nodes.Add(childNode);
+                    List<Url> childUrls = await Task.Run(() => nodeBuilder.GetListUrls(url.Name));
+                    BuildTree(childNode, childUrls, currentLevel + 1, maxLevel);
+                }
 
-                List<Url> childUrls = await Task.Run(() => nodeBuilder.GetListUrls(url.Name));
-                BuildTree(childNode, childUrls, currentLevel + 1, maxLevel);
             }
         }
 
         private bool WithErrors()
         {
             if (UrlTextBox.Text.Trim() == String.Empty)
-            {
                 return true;
-            }
             if (levelsTextBox.Text.Trim() == String.Empty)
-            {
                 return true;
-            }
-
             int num;
 
-            if(!int.TryParse(levelsTextBox.Text.Trim(), out num))
+            if (!int.TryParse(levelsTextBox.Text.Trim(), out num))
             {
-                return true;                
+                return true;
             }
             else
             {
-                if ( num > 3|| num<1)
+                if (num < 1 || num > 3)
                 {
                     return true;
                 }

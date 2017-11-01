@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using HtmlAgilityPack;
-using System.Threading;
 
 namespace WebScrape.Buisness
 {
@@ -17,7 +14,6 @@ namespace WebScrape.Buisness
             baseUrl = baseUrl.Trim(new char[] { '\r', '\n' });
 
             List<Url> urlList = new List<Url>();
-            HashSet<string> LinksHashSet = new HashSet<string>();
             if (!baseUrl.StartsWith("http://") && !baseUrl.StartsWith("https://"))
             {
                 baseUrl = "http://" + baseUrl;
@@ -56,11 +52,7 @@ namespace WebScrape.Buisness
                                 currentUrl.Name = GetAbsoluteUrlString(baseUrl, hrefValue) + Environment.NewLine;
                                 if (!currentUrl.Name.Contains(tempUrlObj.Host))
                                 {
-                                    if (!LinksHashSet.Contains(currentUrl.Name))
-                                    {
-                                        LinksHashSet.Add(currentUrl.Name);
-                                        urlList.Add(currentUrl);
-                                    }
+                                    urlList.Add(currentUrl);
                                 }
 
                             }
