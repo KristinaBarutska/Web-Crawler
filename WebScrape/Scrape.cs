@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,7 +13,7 @@ namespace WebScrape
     {
         private NodeBuilder nodeBuilder;
         private int levels;
-        private HashSet<string> uniqueLinks = new HashSet<string>();
+        private HashSet<Url> uniqueLinks = new HashSet<Url>();
         public Scrape()
         {
             InitializeComponent();
@@ -41,6 +42,9 @@ namespace WebScrape
                     UrlTreeView.Nodes.Add(mainTreeNode);
 
                     BuildTree(mainTreeNode, await Task.Run(() => nodeBuilder.GetListUrls(url)), 0, levels);
+
+                    errorLabel.Text = "Display completed!";
+                    
                 }
 
                 catch (System.InvalidOperationException ex)
@@ -62,13 +66,22 @@ namespace WebScrape
 
             foreach (Url url in urls)
             {
-                if (!uniqueLinks.Contains(url.Name))
+                
+                if (!uniqueLinks.Select(x=>x.Name).Contains(url.Name))
                 {
-                    uniqueLinks.Add(url.Name);
+                    url.Count++;
+                    uniqueLinks.Add(url);
                     TreeNode childNode = new TreeNode(url.Name);
                     mainTreeNode.Nodes.Add(childNode);
                     List<Url> childUrls = await Task.Run(() => nodeBuilder.GetListUrls(url.Name));
                     BuildTree(childNode, childUrls, currentLevel + 1, maxLevel);
+                }
+                else
+                {
+                    Url selectedUrl=uniqueLinks.Where(x => x.Name == url.Name).SingleOrDefault();
+                    uniqueLinks.Remove(selectedUrl);
+                    selectedUrl.Count++;
+                    uniqueLinks.Add(selectedUrl);
                 }
 
             }
@@ -97,5 +110,15 @@ namespace WebScrape
             return false;
         }
 
+        private void ShowStatisticsButton_Click(object sender, EventArgs e)
+        {
+            var links = uniqueLinks.ToList();
+            var bindingList = new BindingList<Url>(links);
+            var source = new BindingSource(bindingList, null);
+            statisticDataGridView.DataSource = source;
+            //var source = new BindingSource();
+            //source.DataSource = links;
+            //statisticDataGridView.DataSource = source;
+        }
     }
 }

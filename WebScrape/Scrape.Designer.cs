@@ -35,8 +35,8 @@
             this.LevelsLabel = new System.Windows.Forms.Label();
             this.levelsTextBox = new System.Windows.Forms.TextBox();
             this.errorLabel = new System.Windows.Forms.Label();
-            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.statisticDataGridView = new System.Windows.Forms.DataGridView();
+            this.ShowStatisticsButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.statisticDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,7 +49,7 @@
             // 
             // submitButton
             // 
-            this.submitButton.Location = new System.Drawing.Point(12, 114);
+            this.submitButton.Location = new System.Drawing.Point(217, 114);
             this.submitButton.Name = "submitButton";
             this.submitButton.Size = new System.Drawing.Size(127, 23);
             this.submitButton.TabIndex = 2;
@@ -59,7 +59,7 @@
             // 
             // UrlTreeView
             // 
-            this.UrlTreeView.Location = new System.Drawing.Point(12, 193);
+            this.UrlTreeView.Location = new System.Drawing.Point(12, 153);
             this.UrlTreeView.Name = "UrlTreeView";
             this.UrlTreeView.Size = new System.Drawing.Size(560, 529);
             this.UrlTreeView.TabIndex = 3;
@@ -93,35 +93,38 @@
             // 
             this.errorLabel.AutoSize = true;
             this.errorLabel.ForeColor = System.Drawing.Color.Coral;
-            this.errorLabel.Location = new System.Drawing.Point(254, 59);
+            this.errorLabel.Location = new System.Drawing.Point(589, 26);
             this.errorLabel.Name = "errorLabel";
             this.errorLabel.Size = new System.Drawing.Size(59, 13);
             this.errorLabel.TabIndex = 7;
             this.errorLabel.Text = "[error label]";
             // 
-            // progressBar
-            // 
-            this.progressBar.Location = new System.Drawing.Point(12, 153);
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(560, 23);
-            this.progressBar.TabIndex = 8;
-            // 
             // statisticDataGridView
             // 
             this.statisticDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.statisticDataGridView.Location = new System.Drawing.Point(706, 153);
+            this.statisticDataGridView.Location = new System.Drawing.Point(592, 153);
             this.statisticDataGridView.Name = "statisticDataGridView";
-            this.statisticDataGridView.Size = new System.Drawing.Size(240, 150);
+            this.statisticDataGridView.Size = new System.Drawing.Size(526, 529);
             this.statisticDataGridView.TabIndex = 9;
+            // 
+            // ShowStatisticsButton
+            // 
+            this.ShowStatisticsButton.Location = new System.Drawing.Point(801, 114);
+            this.ShowStatisticsButton.Name = "ShowStatisticsButton";
+            this.ShowStatisticsButton.Size = new System.Drawing.Size(119, 23);
+            this.ShowStatisticsButton.TabIndex = 10;
+            this.ShowStatisticsButton.Text = "Statistics";
+            this.ShowStatisticsButton.UseVisualStyleBackColor = true;
+            this.ShowStatisticsButton.Click += new System.EventHandler(this.ShowStatisticsButton_Click);
             // 
             // Scrape
             // 
             this.AcceptButton = this.submitButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1357, 751);
+            this.ClientSize = new System.Drawing.Size(1133, 751);
+            this.Controls.Add(this.ShowStatisticsButton);
             this.Controls.Add(this.statisticDataGridView);
-            this.Controls.Add(this.progressBar);
             this.Controls.Add(this.errorLabel);
             this.Controls.Add(this.levelsTextBox);
             this.Controls.Add(this.LevelsLabel);
@@ -146,8 +149,8 @@
         private System.Windows.Forms.Label LevelsLabel;
         private System.Windows.Forms.TextBox levelsTextBox;
         private System.Windows.Forms.Label errorLabel;
-        private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.DataGridView statisticDataGridView;
+        private System.Windows.Forms.Button ShowStatisticsButton;
     }
 }
 
