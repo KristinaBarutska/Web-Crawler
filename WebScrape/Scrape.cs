@@ -18,7 +18,8 @@ namespace WebScrape
         {
             InitializeComponent();
 
-            nodeBuilder = new NodeBuilder();
+            nodeBuilder = new NodeBuilder();           
+
         }
 
         private async void submitButton_Click(object sender, EventArgs e)
@@ -46,8 +47,8 @@ namespace WebScrape
 
                     BuildTree(mainTreeNode, await Task.Run(() => nodeBuilder.GetListUrls(url)), 0, levels);
 
-                    
-                    
+                    errorLabel.Text = "End!";
+
                 }
 
                 catch (System.InvalidOperationException ex)
@@ -119,6 +120,7 @@ namespace WebScrape
             var bindingList = new BindingList<Url>(links);
             var source = new BindingSource(bindingList, null);
             statisticDataGridView.DataSource = source;
-        }
+        }        
+       
     }
 }
