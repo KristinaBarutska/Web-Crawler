@@ -23,6 +23,8 @@ namespace WebScrape
 
         private async void submitButton_Click(object sender, EventArgs e)
         {
+            uniqueLinks.Clear();
+
             if (WithErrors())
             {
                 errorLabel.Text = "Please enter valid url and levels";
@@ -37,13 +39,14 @@ namespace WebScrape
 
                     UrlTreeView.Nodes.Clear();
                     nodeBuilder.Clear();
+                    errorLabel.Text = "Display started!";
 
                     TreeNode mainTreeNode = new TreeNode(url);
                     UrlTreeView.Nodes.Add(mainTreeNode);
 
                     BuildTree(mainTreeNode, await Task.Run(() => nodeBuilder.GetListUrls(url)), 0, levels);
 
-                    errorLabel.Text = "Display completed!";
+                    
                     
                 }
 
@@ -111,14 +114,11 @@ namespace WebScrape
         }
 
         private void ShowStatisticsButton_Click(object sender, EventArgs e)
-        {
+        {          
             var links = uniqueLinks.ToList();
             var bindingList = new BindingList<Url>(links);
             var source = new BindingSource(bindingList, null);
             statisticDataGridView.DataSource = source;
-            //var source = new BindingSource();
-            //source.DataSource = links;
-            //statisticDataGridView.DataSource = source;
         }
     }
 }
