@@ -45,7 +45,8 @@ namespace WebScrape
                     TreeNode mainTreeNode = new TreeNode(url);
                     UrlTreeView.Nodes.Add(mainTreeNode);
 
-                    BuildTree(mainTreeNode, await Task.Run(() => nodeBuilder.GetListUrls(url)), 0, levels);
+
+                    await BuildTree(mainTreeNode, await Task.Run(() => nodeBuilder.GetListUrls(url)), 0, levels);
 
                     errorLabel.Text = "End!";
 
@@ -63,7 +64,7 @@ namespace WebScrape
             }
         }
 
-        private async void BuildTree(TreeNode mainTreeNode, List<Url> urls, int currentLevel, int maxLevel)
+        private async Task BuildTree(TreeNode mainTreeNode, List<Url> urls, int currentLevel, int maxLevel)
         {
             if (currentLevel >= maxLevel)
                 return;
@@ -78,7 +79,7 @@ namespace WebScrape
                     TreeNode childNode = new TreeNode(url.Name);
                     mainTreeNode.Nodes.Add(childNode);
                     List<Url> childUrls = await Task.Run(() => nodeBuilder.GetListUrls(url.Name));
-                    BuildTree(childNode, childUrls, currentLevel + 1, maxLevel);
+                    await BuildTree(childNode, childUrls, currentLevel + 1, maxLevel);
                 }
                 else
                 {
