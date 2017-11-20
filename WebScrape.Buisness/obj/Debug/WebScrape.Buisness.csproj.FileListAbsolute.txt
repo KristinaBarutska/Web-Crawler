@@ -1,0 +1,8 @@
+c:\users\k.barutska\documents\visual studio 2017\Projects\WebScrape\WebScrape.Buisness\bin\Debug\WebScrape.Buisness.dll
+c:\users\k.barutska\documents\visual studio 2017\Projects\WebScrape\WebScrape.Buisness\bin\Debug\WebScrape.Buisness.pdb
+c:\users\k.barutska\documents\visual studio 2017\Projects\WebScrape\WebScrape.Buisness\bin\Debug\HtmlAgilityPack.dll
+c:\users\k.barutska\documents\visual studio 2017\Projects\WebScrape\WebScrape.Buisness\bin\Debug\HtmlAgilityPack.pdb
+c:\users\k.barutska\documents\visual studio 2017\Projects\WebScrape\WebScrape.Buisness\bin\Debug\HtmlAgilityPack.xml
+c:\users\k.barutska\documents\visual studio 2017\Projects\WebScrape\WebScrape.Buisness\obj\Debug\WebScrape.Buisness.csprojResolveAssemblyReference.cache
+c:\users\k.barutska\documents\visual studio 2017\Projects\WebScrape\WebScrape.Buisness\obj\Debug\WebScrape.Buisness.dll
+c:\users\k.barutska\documents\visual studio 2017\Projects\WebScrape\WebScrape.Buisness\obj\Debug\WebScrape.Buisness.pdb
